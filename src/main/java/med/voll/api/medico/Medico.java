@@ -23,6 +23,7 @@ public class Medico {
     @Enumerated(EnumType.STRING)
     private DatosEspecialidad especialidad;
     private Direccion direccion;
+    private Boolean activo;
 
     public Medico(DatosRegistroMedico datosRegistroMedico) {
         this.nombre = datosRegistroMedico.nombre();
@@ -31,5 +32,23 @@ public class Medico {
         this.telefono = datosRegistroMedico.telefono();
         this.especialidad = datosRegistroMedico.especialidad();
         this.direccion = new Direccion(datosRegistroMedico.direccion());
+        this.activo = true;
+    }
+
+    public void atualizarInformacion(DatosActualizacionMedico datos) {
+        if(datos.nombre() != null){
+            this.nombre = datos.nombre();
+        }
+        if (datos.telefono() != null)
+            this.telefono = datos.telefono();
+
+        if (datos.direccion() != null){
+            this.direccion = direccion.actualizarDatos(datos.direccion());
+        }
+
+    }
+    public void inactivar(){
+        this.activo = false;
+
     }
 }
